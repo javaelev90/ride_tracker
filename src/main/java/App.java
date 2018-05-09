@@ -14,12 +14,12 @@ public class App {
 			     "id INTEGER Primary key, " +
 			     "name VARCHAR(100) not null, " +
 			     "duration INTEGER not null)";
-		String selectQuery = "SELECT * FROM " + "ride";
+		String selectQuery = "SELECT * FROM ride";
 //		String add = "INSERT INTO ride"
 //				+ " (name, duration)"
 //				+ " VALUES "+"('anders-ride', 12)";
 		
-		
+		String alterTable = "ALTER TABLE ride ADD ride_date DATETIME AFTER duration;";
 		try(Connection conn = DriverManager.getConnection(url)){
 			
 		} catch (SQLException e1) {
@@ -29,15 +29,17 @@ public class App {
 		
 		
 		try (Connection conn = DriverManager.getConnection(url); Statement stmt = conn.createStatement()){
-			stmt.execute("DROP TABLE IF EXISTS Ride");
+//			stmt.execute("DROP TABLE IF EXISTS Ride");
 			
-			stmt.executeUpdate(sql);
+//			stmt.executeUpdate(sql);
+//			stmt.executeUpdate(alterTable);
 //			stmt.executeUpdate(add);
 			ResultSet result = stmt.executeQuery(selectQuery);
 			while(result.next()) {
 				System.out.println(result.getString(1));
 				System.out.println(result.getString(2));
 				System.out.println(result.getString(3));
+				System.out.println(result.getString(4));
 				System.out.println("");
 			}
 			System.out.println("...");
